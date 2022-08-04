@@ -31,7 +31,7 @@ describe('Customer', () => {
     expect(customer.name).to.deep.equal("Leatha Ullrich")
   });
 
-  it.skip('should have an ingredient estimatedCostInCents', function() {
-    expect(customer.estimatedCostInCents).to.deep.equal(142)
+  it('should have a bookingsMade array', function() {
+    expect(customer.bookingsMade).to.be.an('array')
   });
 });
