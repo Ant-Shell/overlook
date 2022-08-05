@@ -1,10 +1,10 @@
 import { expect } from 'chai';
 import Customer from '../src/classes/Customer';
 
-let customer;
-let customerData;
-
 describe('Customer', () => {
+  let customer;
+  let customerData;
+
   beforeEach(function() {
     customerData =
     {
