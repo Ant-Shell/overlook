@@ -30,8 +30,4 @@ describe('Customer', () => {
   it('should have an ingredient name', function() {
     expect(customer.name).to.deep.equal("Leatha Ullrich")
   });
-
-  it('should have a bookingsMade array', function() {
-    expect(customer.bookingsMade).to.be.an('array')
-  });
 });
