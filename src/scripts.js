@@ -20,11 +20,24 @@ console.log('This is the JavaScript entry file - your code begins here.');
 
 
 // ###########  Global Variables  ###########
-
-
+let booking;
+let bookingData;
+let customer;
+let customerData;
+let reservation;
+let roomData;
 
 // ###########  Promises  ###########
-
+function getPromiseData() {
+  Promise.all( [fetchData('customers'), fetchData('rooms'), fetchData('bookings')]).then(data => {
+    customerData = data[0];
+    roomData = data[1];
+    bookingData = data[2]
+    customer = new Customer(usersData[randomIndex(usersData)]);
+    room = new Room(roomData);
+    booking = new Booking(bookingData)
+  })
+}
 
 
 // ###########  Event Listeners  ###########
