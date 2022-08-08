@@ -20,12 +20,12 @@ console.log('This is the JavaScript entry file - your code begins here.');
 
 
 // ###########  Global Variables  ###########
-let booking;
+let bookings;
 let bookingData;
-let customer;
+let customers;
 let customerData;
 let reservation;
-let room;
+let rooms;
 let roomData;
 
 // ###########  Promises  ###########
@@ -34,18 +34,21 @@ function getPromiseData() {
     customerData = data[0];
     roomData = data[1];
     bookingData = data[2];
-    customer = new Customer(usersData[randomIndex(usersData)]);
-    room = new Room(roomData);
-    booking = new Booking(bookingData);
+    customers = customerData.customers.map(customer => new Customer(customer));
+    rooms = roomData.rooms.map(room => new Room(room));
+    bookings = bookingData.bookings.map(booking => new Booking(booking)); 
+    reservation = new Reservation(rooms, bookings)
   })
 }
 
 
 // ###########  Event Listeners  ###########
-
+window.addEventListener('load', getPromiseData);
 
 
 // ###########  On-Load Functions  ###########
+
+
 
 
 
