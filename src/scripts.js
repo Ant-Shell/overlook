@@ -5,10 +5,10 @@
 // An example of how you tell webpack to use a CSS (SCSS) file
 import './css/styles.css';
 import {fetchData} from './apiCalls';
-// import Booking from '.classes/Booking';
-// import Customer from '.classes/Customer';
-// import Reservation from '.classes/Reservation';
-// import Room from '.classes/Room';
+import Booking from './classes/Booking';
+import Customer from './classes/Customer';
+import Reservation from './classes/Reservation';
+import Room from './classes/Room';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
@@ -25,6 +25,7 @@ let bookingData;
 let customer;
 let customerData;
 let reservation;
+let room;
 let roomData;
 
 // ###########  Promises  ###########
@@ -32,10 +33,10 @@ function getPromiseData() {
   Promise.all( [fetchData('customers'), fetchData('rooms'), fetchData('bookings')]).then(data => {
     customerData = data[0];
     roomData = data[1];
-    bookingData = data[2]
+    bookingData = data[2];
     customer = new Customer(usersData[randomIndex(usersData)]);
     room = new Room(roomData);
-    booking = new Booking(bookingData)
+    booking = new Booking(bookingData);
   })
 }
 
