@@ -25,7 +25,7 @@ describe('Booking', () => {
   })
 
   it('should have an id', function() {
-    expect(booking.id).to.deep.equal(1)
+    expect(booking.id).to.deep.equal("5fwrgu4i7k55hl6sz")
   });
 
   it('should have a user ID', function() {
@@ -36,7 +36,7 @@ describe('Booking', () => {
     expect(booking.date).to.deep.equal("2022/04/22")
   })
 
-  it('should have a room Number', function() {
+  it('should have a room number', function() {
     expect(booking.roomNumber).to.deep.equal(15)
   })
 });
