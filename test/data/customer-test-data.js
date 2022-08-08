@@ -20,3 +20,5 @@ let customerData = [
     "name": "Earline Hamill"
   },
 ]
+
+export default customerData;
