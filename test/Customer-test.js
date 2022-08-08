@@ -19,15 +19,15 @@ describe('Customer', () => {
     expect(Customer).to.be.a('function');
   })
 
-  it('should be an instance of ingredient', function() {
+  it('should be an instance of customer', function() {
     expect(customer).to.be.an.instanceOf(Customer);
   })
 
-  it('should have an id of an ingredient', function() {
+  it('should have an id of a customer', function() {
     expect(customer.id).to.deep.equal(1)
   });
 
-  it('should have an ingredient name', function() {
+  it('should have a customer name', function() {
     expect(customer.name).to.deep.equal("Leatha Ullrich")
   });
 });
