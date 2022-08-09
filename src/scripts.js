@@ -1,6 +1,3 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
-
 // ###########  Imports  ###########
 // An example of how you tell webpack to use a CSS (SCSS) file
 import './css/styles.css';
@@ -13,7 +10,6 @@ import Room from './classes/Room';
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
 
-console.log('This is the JavaScript entry file - your code begins here.');
 
 // ###########  Query Selectors ###########
 const upcomingReservationsContainer = document.querySelector('.upcoming-reservations-container');
@@ -45,7 +41,6 @@ function getPromiseData() {
   })
 }
 
-
 // ###########  Event Listeners  ###########
 window.addEventListener('load', getPromiseData);
 
@@ -53,32 +48,33 @@ window.addEventListener('load', getPromiseData);
 // ###########  On-Load Functions  ###########
 function populatePastBookings() {
   let pastBookings = reservation.returnPastBookings();
-  // console.log(pastReservationsContainer)
+  pastReservationsContainer.innerHTML = '';
   if (pastBookings.length === 0) {
-    console.log("No previous bookings at this time")
+    pastReservationsContainer.innerText = "No previous bookings at this time"
   } else {
-    // Dynamically create divs with past booking info
     pastBookings.forEach(booking => {
       let div = document.createElement('div');
       div.id = 'pastReservation';
       div.className = 'past-reservation-details';
-      div.innerHTML = `${booking.id}\n${booking.date}\n${booking.roomNumber}`;
+      div.innerHTML = `Booking ID: ${booking.id}<br><br>Booking Date: ${booking.date}</br></br>Room Number: ${booking.roomNumber}`;
       pastReservationsContainer.appendChild(div);
-
-      // console.log(booking.id)
-      // console.log(booking.date)
-      // console.log(booking.roomNumber)
     })
   }
 }
 
 function populateUpcomingBookings() {
   let upcomingBookings = reservation.returnUpcomingBookings();
-  // console.log(upcomingReservationsContainer)
+  upcomingReservationsContainer.innerHTML = '';
   if (upcomingBookings.length === 0) {
-    console.log("No upcoming bookings at this time")
+    upcomingReservationsContainer.innerText = "No upcoming bookings at this time"
   } else {
-    // Dynamically create divs with upcoming booking info
+    upcomingBookings.forEach(booking => {
+      let div = document.createElement('div');
+      div.id = 'upcomingReservation';
+      div.className = 'upcoming-reservation-details'
+      div.innerHTML = `Booking ID: ${booking.id}<br><br>Booking Date: ${booking.date}</br></br>Room Number: ${booking.roomNumber}`;
+      upcomingReservationsContainer.appendChild(div);
+    })
   }
   
 }
