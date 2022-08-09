@@ -15,6 +15,11 @@ import './images/turing-logo.png'
 const upcomingReservationsContainer = document.querySelector('.upcoming-reservations-container');
 const pastReservationsContainer = document.querySelector('.past-reservations-container');
 const amountValue = document.querySelector('.amt-value');
+const bookRoomButton = document.getElementById('bookRoomButton');
+const homeViewSection = document.getElementById('homeSection')
+const bookingViewSection = document.getElementById('bookingReservationSection')
+// const homeViewSection = document.querySelector('.home-view-section');
+// const bookingViewSection = document.querySelector('.booking-reservation-view-section');
 
 // ###########  Global Variables  ###########
 let bookings;
@@ -45,7 +50,7 @@ function getPromiseData() {
 
 // ###########  Event Listeners  ###########
 window.addEventListener('load', getPromiseData);
-
+bookRoomButton.addEventListener('click', bookingReservationView)
 
 // ###########  On-Load Functions  ###########
 function populatePastBookings() {
@@ -86,7 +91,29 @@ function populateTotalCost() {
   amountValue.innerText = `$${cost}`;
 }
 
+// function hide(elements) {
+//   elements.forEach((element) => {
+//     element.classList.add('hidden');
+//   })
+// }
 
+// function show(elements) {
+//   elements.forEach((element) => {
+//     element.classList.remove('hidden');
+//   })
+// }
+
+function toggleHomeView() {
+  homeViewSection.classList.toggle("hidden");
+}
+
+function toggleBookingView() {
+  bookingViewSection.classList.toggle("hidden");
+}
+
+function bookingReservationView() {
+  console.log("hello")
+}
 
 
 
