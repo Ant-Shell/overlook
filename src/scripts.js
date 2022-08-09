@@ -19,6 +19,7 @@ const amountValue = document.querySelector('.amt-value');
 const bookRoomButton = document.getElementById('bookRoomButton');
 const homeViewSection = document.getElementById('homeSection');
 const bookingViewSection = document.getElementById('bookingReservationSection');
+const reservationsPromt = document.querySelector('.reservations-promt')
 
 // ###########  Global Variables  ###########
 let bookings;
@@ -90,24 +91,8 @@ function populateTotalCost() {
   amountValue.innerText = `$${cost}`;
 }
 
-// function hide(elements) {
-//   elements.forEach((element) => {
-//     element.classList.add('hidden');
-//   })
-// }
-
-// function show(elements) {
-//   elements.forEach((element) => {
-//     element.classList.remove('hidden');
-//   })
-// }
-
-function toggleHomeView() {
-  homeViewSection.classList.toggle("hidden");
-}
-
-function toggleBookingView() {
-  bookingViewSection.classList.toggle("hidden");
+function toggleView(section) {
+  section.classList.toggle("hidden");
 }
 
 function populateUpcomingBookings2() {
@@ -127,8 +112,8 @@ function populateUpcomingBookings2() {
 }
 
 function bookingReservationView() {
-  toggleHomeView();
-  toggleBookingView();
+  toggleView(homeViewSection);
+  toggleView(bookingViewSection);
   populateUpcomingBookings2();
 }
 
