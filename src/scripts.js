@@ -14,6 +14,7 @@ import './images/turing-logo.png'
 // ###########  Query Selectors ###########
 const upcomingReservationsContainer = document.querySelector('.upcoming-reservations-container');
 const pastReservationsContainer = document.querySelector('.past-reservations-container');
+const amountValue = document.querySelector('.amt-value');
 
 // ###########  Global Variables  ###########
 let bookings;
@@ -38,6 +39,7 @@ function getPromiseData() {
     reservation = new Reservation(customerID, rooms, bookings)
     populateUpcomingBookings();
     populatePastBookings();
+    populateTotalCost();
   })
 }
 
@@ -76,7 +78,12 @@ function populateUpcomingBookings() {
       upcomingReservationsContainer.appendChild(div);
     })
   }
-  
+}
+
+function populateTotalCost() {
+  let cost = reservation.returnTotalCost();
+  amountValue.innerText = '';
+  amountValue.innerText = `$${cost}`;
 }
 
 
