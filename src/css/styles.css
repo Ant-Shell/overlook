@@ -35,9 +35,10 @@ footer {
   display: flex;
   justify-content: left;
   align-items: flex-end;
-  margin-left: 200px;
-  width: 100vw;
+  margin-left: 10vw;
+  width: 80vw;
   height: 7.5vh;
+  border: 5px solid gray;
 }
 
 .book-room-btn {
@@ -52,19 +53,19 @@ footer {
   width: 100vw;
 }
 
-.uc-reservation-container {
+.upcoming-reservations-container {
   width: 70vw;
   height: 250px;
   padding: 10px;
-  /* border: 5px solid gray; */
+  border: 5px solid gray;
   margin: 0;
 }
 
-.p-reservation-container {
+.past-reservations-container {
   width: 70vw;
   height: 250px;
   padding: 10px;
-  /* border: 5px solid gray; */
+  border: 5px solid gray;
   margin: 10px 0 0 0;
 }
 
@@ -72,7 +73,7 @@ footer {
   text-align: center;
   width: 50vw;
   padding: 10px;
-  /* border: 5px solid gray; */
+  border: 5px solid gray;
   margin: 10px 0 0 0;
 }
 
