@@ -94,3 +94,7 @@ footer {
 .amt-value {
   font-size: 1.5em;
 }
+
+.hidden {
+  display: none;
+}
