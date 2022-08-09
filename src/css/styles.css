@@ -48,7 +48,8 @@ footer {
   margin-right: 80px;
 }
 
-.home-view-section {
+.home-view-section,
+.booking-reservation-view-section {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -57,7 +58,9 @@ footer {
 }
 
 .past-reservations-container,
-.upcoming-reservations-container {
+.upcoming-reservations-container,
+.upcoming-reservations-container2,
+.form-details-container {
   display: flex;
   justify-content: flex-start;
   align-content: center;
