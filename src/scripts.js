@@ -13,13 +13,12 @@ import './images/turing-logo.png'
 
 // ###########  Query Selectors ###########
 const upcomingReservationsContainer = document.querySelector('.upcoming-reservations-container');
+const upcomingReservationsContainer2 = document.querySelector('.upcoming-reservations-container2');
 const pastReservationsContainer = document.querySelector('.past-reservations-container');
 const amountValue = document.querySelector('.amt-value');
 const bookRoomButton = document.getElementById('bookRoomButton');
-const homeViewSection = document.getElementById('homeSection')
-const bookingViewSection = document.getElementById('bookingReservationSection')
-// const homeViewSection = document.querySelector('.home-view-section');
-// const bookingViewSection = document.querySelector('.booking-reservation-view-section');
+const homeViewSection = document.getElementById('homeSection');
+const bookingViewSection = document.getElementById('bookingReservationSection');
 
 // ###########  Global Variables  ###########
 let bookings;
@@ -111,8 +110,26 @@ function toggleBookingView() {
   bookingViewSection.classList.toggle("hidden");
 }
 
+function populateUpcomingBookings2() {
+  let upcomingBookings = reservation.returnUpcomingBookings();
+  upcomingReservationsContainer2.innerHTML = '';
+  if (upcomingBookings.length === 0) {
+    upcomingReservationsContainer2.innerText = "No upcoming bookings at this time"
+  } else {
+    upcomingBookings.forEach((booking, index) => {
+      let div = document.createElement('div');
+      div.id = `upcomingReservation${[index + 1]}`;
+      div.className = 'upcoming-reservation-details'
+      div.innerHTML = `Booking ID: ${booking.id}<br><br>Booking Date: ${booking.date}</br></br>Room Number: ${booking.roomNumber}`;
+      upcomingReservationsContainer2.appendChild(div);
+    })
+  }
+}
+
 function bookingReservationView() {
-  console.log("hello")
+  toggleHomeView();
+  toggleBookingView();
+  populateUpcomingBookings2();
 }
 
 
