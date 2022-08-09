@@ -13,8 +13,13 @@ import './images/turing-logo.png'
 
 // ###########  Query Selectors ###########
 const upcomingReservationsContainer = document.querySelector('.upcoming-reservations-container');
+const upcomingReservationsContainer2 = document.querySelector('.upcoming-reservations-container2');
 const pastReservationsContainer = document.querySelector('.past-reservations-container');
 const amountValue = document.querySelector('.amt-value');
+const bookRoomButton = document.getElementById('bookRoomButton');
+const homeViewSection = document.getElementById('homeSection');
+const bookingViewSection = document.getElementById('bookingReservationSection');
+const reservationsForm = document.getElementById('reservationForm')
 
 // ###########  Global Variables  ###########
 let bookings;
@@ -45,7 +50,7 @@ function getPromiseData() {
 
 // ###########  Event Listeners  ###########
 window.addEventListener('load', getPromiseData);
-
+bookRoomButton.addEventListener('click', bookingReservationView)
 
 // ###########  On-Load Functions  ###########
 function populatePastBookings() {
@@ -54,9 +59,9 @@ function populatePastBookings() {
   if (pastBookings.length === 0) {
     pastReservationsContainer.innerText = "No previous bookings at this time"
   } else {
-    pastBookings.forEach(booking => {
+    pastBookings.forEach((booking, index) => {
       let div = document.createElement('div');
-      div.id = 'pastReservation';
+      div.id = `pastReservation${[index + 1]}`;
       div.className = 'past-reservation-details';
       div.innerHTML = `Booking ID: ${booking.id}<br><br>Booking Date: ${booking.date}</br></br>Room Number: ${booking.roomNumber}`;
       pastReservationsContainer.appendChild(div);
@@ -70,9 +75,9 @@ function populateUpcomingBookings() {
   if (upcomingBookings.length === 0) {
     upcomingReservationsContainer.innerText = "No upcoming bookings at this time"
   } else {
-    upcomingBookings.forEach(booking => {
+    upcomingBookings.forEach((booking, index) => {
       let div = document.createElement('div');
-      div.id = 'upcomingReservation';
+      div.id = `upcomingReservation${[index + 1]}`;
       div.className = 'upcoming-reservation-details'
       div.innerHTML = `Booking ID: ${booking.id}<br><br>Booking Date: ${booking.date}</br></br>Room Number: ${booking.roomNumber}`;
       upcomingReservationsContainer.appendChild(div);
@@ -86,7 +91,41 @@ function populateTotalCost() {
   amountValue.innerText = `$${cost}`;
 }
 
+function toggleView(section) {
+  section.classList.toggle("hidden");
+}
 
+function populateUpcomingBookings2() {
+  let upcomingBookings = reservation.returnUpcomingBookings();
+  upcomingReservationsContainer2.innerHTML = '';
+  if (upcomingBookings.length === 0) {
+    upcomingReservationsContainer2.innerText = "No upcoming bookings at this time"
+  } else {
+    upcomingBookings.forEach((booking, index) => {
+      let div = document.createElement('div');
+      div.id = `upcomingReservation${[index + 1]}`;
+      div.className = 'upcoming-reservation-details'
+      div.innerHTML = `Booking ID: ${booking.id}<br><br>Booking Date: ${booking.date}</br></br>Room Number: ${booking.roomNumber}`;
+      upcomingReservationsContainer2.appendChild(div);
+    })
+  }
+}
+
+function bookingReservationView() {
+  toggleView(homeViewSection);
+  toggleView(bookingViewSection);
+  populateUpcomingBookings2();
+  createDateSelector();
+}
+
+function createDateSelector() {
+  let dateToday = new Date().toLocaleDateString('en-ZA')
+  let minDate = dateToday.split("/").join("-");
+  reservationsForm.innerHTML = 
+    `<label class="reservations-promt">Please select a date for your reservation:<br>
+    <input type="date" name="reservation" min="${minDate}" required>
+    </label>`;
+}
 
 
 

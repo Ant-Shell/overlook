@@ -48,7 +48,8 @@ footer {
   margin-right: 80px;
 }
 
-.home-view-section {
+.home-view-section,
+.booking-reservation-view-section {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -57,7 +58,8 @@ footer {
 }
 
 .past-reservations-container,
-.upcoming-reservations-container {
+.upcoming-reservations-container,
+.upcoming-reservations-container2 {
   display: flex;
   justify-content: flex-start;
   align-content: center;
@@ -66,6 +68,14 @@ footer {
   padding: 10px;
   margin: 10px 0 0 0;
   overflow: auto;
+}
+
+.form-details-container {
+  text-align:center;
+  width: 90vw;
+  height: 250px;
+  padding: 10px;
+  margin: 10px 0 0 0;
 }
 
 .upcoming-reservation-details,
@@ -93,4 +103,8 @@ footer {
 
 .amt-value {
   font-size: 1.5em;
+}
+
+.hidden {
+  display: none;
 }
