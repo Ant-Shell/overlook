@@ -16,9 +16,13 @@ class Reservation {
   returnUpcomingBookings() {
     let dateToday = new Date().toLocaleDateString('en-ZA');
     let futureBookings = this.bookings.filter(booking => {
-      return booking.date > dateToday === booking.userID;
+      return booking.date > dateToday && this.customerID === booking.userID;
     });
     return futureBookings;
+  }
+
+  returnTotalAmountSpent() {
+    console.log("Hello")
   }
 }
 
