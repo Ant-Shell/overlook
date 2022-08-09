@@ -11,7 +11,7 @@ class Reservation {
     return pastBookings;
   }
 
-  returnFutureBookings() {
+  returnUpcomingBookings() {
     let dateToday = new Date().toLocaleDateString('en-ZA');
     let futureBookings = this.bookings.filter(booking => booking.date > dateToday);
     return futureBookings;
