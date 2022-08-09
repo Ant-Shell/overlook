@@ -19,7 +19,7 @@ const amountValue = document.querySelector('.amt-value');
 const bookRoomButton = document.getElementById('bookRoomButton');
 const homeViewSection = document.getElementById('homeSection');
 const bookingViewSection = document.getElementById('bookingReservationSection');
-const reservationsPromt = document.querySelector('.reservations-promt')
+const reservationsForm = document.getElementById('reservationForm')
 
 // ###########  Global Variables  ###########
 let bookings;
@@ -115,6 +115,16 @@ function bookingReservationView() {
   toggleView(homeViewSection);
   toggleView(bookingViewSection);
   populateUpcomingBookings2();
+  createDateSelector();
+}
+
+function createDateSelector() {
+  let dateToday = new Date().toLocaleDateString('en-ZA')
+  let minDate = dateToday.split("/").join("-");
+  reservationsForm.innerHTML = 
+    `<label class="reservations-promt">Please select a date for your reservation:<br>
+    <input type="date" name="reservation" min="${minDate}" required>
+    </label>`;
 }
 
 
