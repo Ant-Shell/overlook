@@ -4,6 +4,18 @@ class Reservation {
     this.rooms = rooms;
     this.bookings = bookings;
   }
+
+  returnPastBookings() {
+    let dateToday = new Date().toLocaleDateString('en-ZA');
+    let pastBookings = this.bookings.filter(booking => booking.date < dateToday);
+    return pastBookings;
+  }
+
+  returnFutureBookings() {
+    let dateToday = new Date().toLocaleDateString('en-ZA');
+    let futureBookings = this.bookings.filter(booking => booking.date > dateToday);
+    return futureBookings;
+  }
 }
 
 
