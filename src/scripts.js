@@ -24,7 +24,7 @@ let bookings;
 let bookingData;
 let customers;
 let customerData;
-let customerId;
+let customerID;
 let reservation;
 let rooms;
 let roomData;
@@ -38,8 +38,8 @@ function getPromiseData() {
     bookings = bookingData.bookings.map(booking => new Booking(booking)); 
     customers = customerData.customers.map(customer => new Customer(customer));
     rooms = roomData.rooms.map(room => new Room(room));
-    customerId = customers[0].id;
-    reservation = new Reservation(customerId, rooms, bookings)
+    customerID = customers[0].id;
+    reservation = new Reservation(customerID, rooms, bookings)
   })
 }
 
