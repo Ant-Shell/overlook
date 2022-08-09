@@ -1,6 +1,6 @@
 class Reservation {
-  constructor(customerId, rooms, bookings) {
-    this.customerId = customerId;
+  constructor(customerID, rooms, bookings) {
+    this.customerID = customerID;
     this.rooms = rooms;
     this.bookings = bookings;
   }
