@@ -21,11 +21,22 @@ class Reservation {
     return futureBookings;
   }
 
-  returnTotalAmountSpent() {
-    console.log("Hello")
+  returnTotalCost() {
+    let upcomingBookings = this.returnUpcomingBookings();
+    let pastBookings = this.returnPastBookings();
+    let combinedBookings = upcomingBookings.concat(pastBookings);
+    let rooms = this.rooms;
+    let value = 0;
+    combinedBookings.forEach(booking => {
+      rooms.forEach(room => {
+        if (booking.roomNumber === room.number) {
+          value += room.costPerNight
+        }
+      })
+    })
+    return value.toFixed(2);
   }
 }
-
 
 
 
