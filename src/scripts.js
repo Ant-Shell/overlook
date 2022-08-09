@@ -16,8 +16,8 @@ import './images/turing-logo.png'
 console.log('This is the JavaScript entry file - your code begins here.');
 
 // ###########  Query Selectors ###########
-
-
+const upcomingReservationsContainer = document.querySelector('.upcoming-reservations-container');
+const pastReservationsContainer = document.querySelector('.past-reservations-container');
 
 // ###########  Global Variables  ###########
 let bookings;
@@ -40,6 +40,8 @@ function getPromiseData() {
     rooms = roomData.rooms.map(room => new Room(room));
     customerID = customers[0].id;
     reservation = new Reservation(customerID, rooms, bookings)
+    populateUpcomingBookings();
+    populatePastBookings();
   })
 }
 
@@ -49,7 +51,13 @@ window.addEventListener('load', getPromiseData);
 
 
 // ###########  On-Load Functions  ###########
+function populatePastBookings() {
+  console.log(reservation.returnPastBookings())
+}
 
+function populateUpcomingBookings() {
+  console.log(reservation.returnUpcomingBookings())
+}
 
 
 
