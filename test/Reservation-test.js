@@ -82,4 +82,22 @@ describe('Reservation', () => {
     expect(reservation.bookings).to.be.an('array');
     expect(reservation.bookings[0].id).to.deep.equal('5fwrgu4i7k55hl6sz');
   })
+
+  it('should be able to return bookings made in the past', function() {
+    expect(reservation.returnPastBookings()[0]).to.deep.equal({
+      id: '5fwrgu4i7k55hl6sz',
+      userID: 9,
+      date: '2022/04/22',
+      roomNumber: 15
+    })
+  })
+
+  it('should be able to return upcoming bookings', function() {
+    expect(reservation.returnFutureBookings()[0]).to.deep.equal({
+      id: '5fwrgu4i7k55hl727',
+      userID: 1,
+      date: '2022/11/06',
+      roomNumber: 22
+    })
+  })
 })
