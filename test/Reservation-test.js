@@ -14,6 +14,9 @@ describe('Reservation', () => {
   let customer1;
   let customer2;
   let customer3;
+  let customerID1;
+  let customerID2;
+  let customerID3;
   let room1;
   let room2;
   let room3;
@@ -25,11 +28,19 @@ describe('Reservation', () => {
   let booking4;
   let booking5;
   let booking6;
+  let reservation;
+  let reservation1;
+  let reservation2;
+  let reservation3;
+
 
   beforeEach(function() {
     bookingInfo = bookingData;
     customerInfo = customerData;
     roomInfo = roomData;
+    customerID1 = 1;
+    customerID2 = 9;
+    customerID3 = 13;
     customer1 = new Customer(customerInfo[0]); // Cust 1
     customer2 = new Customer(customerInfo[1]); // Cust 9
     customer3 = new Customer(customerInfo[2]); // Cust 13
@@ -44,9 +55,31 @@ describe('Reservation', () => {
     booking4 = new Booking(bookingInfo[9]); // Cust 1 | Room 22
     booking5 = new Booking(bookingInfo[5]); // Cust 9 | Room 23
     booking6 = new Booking(bookingInfo[7]); // Cust 13 | Room 6
+    reservation = new Reservation(1, roomInfo, bookingInfo)
+    reservation1 = new Reservation(customerID1, roomInfo, bookingInfo) // Cust 1
+    reservation2 = new Reservation(customerID2, roomInfo, bookingInfo) // Cust 9
+    reservation3 = new Reservation(customerID3, roomInfo, bookingInfo) // Cust 13
   }) 
 
   it('should be a function', function() {
     expect(Reservation).to.be.a('function');
+  })
+  
+  it('should be an instance of reservation', function() {
+    expect(reservation).to.be.an.instanceOf(Reservation);
+  })
+
+  it('should have a customer id', function() {
+    expect(reservation.customerID).to.deep.equal(1);
+  })
+
+  it('should have rooms', function() {
+    expect(reservation.rooms).to.be.an('array');
+    expect(reservation.rooms[0].roomType).to.deep.equal('single room');
+  })
+
+  it('should have bookings', function() {
+    expect(reservation.bookings).to.be.an('array');
+    expect(reservation.bookings[0].id).to.deep.equal('5fwrgu4i7k55hl6sz');
   })
 })
