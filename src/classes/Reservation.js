@@ -7,13 +7,17 @@ class Reservation {
 
   returnPastBookings() {
     let dateToday = new Date().toLocaleDateString('en-ZA');
-    let pastBookings = this.bookings.filter(booking => booking.date < dateToday);
+    let pastBookings = this.bookings.filter(booking => {
+      return booking.date < dateToday && this.customerID === booking.userID;
+    });
     return pastBookings;
   }
 
-  returnFutureBookings() {
+  returnUpcomingBookings() {
     let dateToday = new Date().toLocaleDateString('en-ZA');
-    let futureBookings = this.bookings.filter(booking => booking.date > dateToday);
+    let futureBookings = this.bookings.filter(booking => {
+      return booking.date > dateToday === booking.userID;
+    });
     return futureBookings;
   }
 }

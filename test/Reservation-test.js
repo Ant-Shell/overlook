@@ -93,7 +93,7 @@ describe('Reservation', () => {
   })
 
   it('should be able to return upcoming bookings', function() {
-    expect(reservation.returnFutureBookings()[0]).to.deep.equal({
+    expect(reservation.returnUpcomingBookings()[0]).to.deep.equal({
       id: '5fwrgu4i7k55hl727',
       userID: 1,
       date: '2022/11/06',
