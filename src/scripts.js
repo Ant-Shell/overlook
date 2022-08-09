@@ -52,11 +52,35 @@ window.addEventListener('load', getPromiseData);
 
 // ###########  On-Load Functions  ###########
 function populatePastBookings() {
-  console.log(reservation.returnPastBookings())
+  let pastBookings = reservation.returnPastBookings();
+  // console.log(pastReservationsContainer)
+  if (pastBookings.length === 0) {
+    console.log("No previous bookings at this time")
+  } else {
+    // Dynamically create divs with past booking info
+    pastBookings.forEach(booking => {
+      let div = document.createElement('div');
+      div.id = 'pastReservation';
+      div.className = 'past-reservation-details';
+      div.innerHTML = `${booking.id}\n${booking.date}\n${booking.roomNumber}`;
+      pastReservationsContainer.appendChild(div);
+
+      // console.log(booking.id)
+      // console.log(booking.date)
+      // console.log(booking.roomNumber)
+    })
+  }
 }
 
 function populateUpcomingBookings() {
-  console.log(reservation.returnUpcomingBookings())
+  let upcomingBookings = reservation.returnUpcomingBookings();
+  // console.log(upcomingReservationsContainer)
+  if (upcomingBookings.length === 0) {
+    console.log("No upcoming bookings at this time")
+  } else {
+    // Dynamically create divs with upcoming booking info
+  }
+  
 }
 
 
