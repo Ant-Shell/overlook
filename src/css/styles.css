@@ -59,8 +59,7 @@ footer {
 
 .past-reservations-container,
 .upcoming-reservations-container,
-.upcoming-reservations-container2,
-.form-details-container {
+.upcoming-reservations-container2 {
   display: flex;
   justify-content: flex-start;
   align-content: center;
@@ -69,6 +68,14 @@ footer {
   padding: 10px;
   margin: 10px 0 0 0;
   overflow: auto;
+}
+
+.form-details-container {
+  text-align:center;
+  width: 90vw;
+  height: 250px;
+  padding: 10px;
+  margin: 10px 0 0 0;
 }
 
 .upcoming-reservation-details,
