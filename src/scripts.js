@@ -54,9 +54,9 @@ function populatePastBookings() {
   if (pastBookings.length === 0) {
     pastReservationsContainer.innerText = "No previous bookings at this time"
   } else {
-    pastBookings.forEach(booking => {
+    pastBookings.forEach((booking, index) => {
       let div = document.createElement('div');
-      div.id = 'pastReservation';
+      div.id = `pastReservation${[index + 1]}`;
       div.className = 'past-reservation-details';
       div.innerHTML = `Booking ID: ${booking.id}<br><br>Booking Date: ${booking.date}</br></br>Room Number: ${booking.roomNumber}`;
       pastReservationsContainer.appendChild(div);
@@ -70,9 +70,9 @@ function populateUpcomingBookings() {
   if (upcomingBookings.length === 0) {
     upcomingReservationsContainer.innerText = "No upcoming bookings at this time"
   } else {
-    upcomingBookings.forEach(booking => {
+    upcomingBookings.forEach((booking, index) => {
       let div = document.createElement('div');
-      div.id = 'upcomingReservation';
+      div.id = `upcomingReservation${[index + 1]}`;
       div.className = 'upcoming-reservation-details'
       div.innerHTML = `Booking ID: ${booking.id}<br><br>Booking Date: ${booking.date}</br></br>Room Number: ${booking.roomNumber}`;
       upcomingReservationsContainer.appendChild(div);
