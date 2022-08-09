@@ -9,12 +9,12 @@
 <header>
   <h1>OverLook.com</h1>
   <h2 class="affirmation-message">Random Affirmation Message Here</h2>
-  <button type="button" class="book-room-btn">Book a Room</button>
+  <button type="button" class="book-room-btn" id="bookRoomButton">Book a Room</button>
 </header>
 <main>
-  <section class="home-view-section">
+  <section class="home-view-section" id="homeSection">
     <h3 class="welcome-banner">Welcome Human, here are your account details</h3>
-    <h4 class ="upcoming-reservations-banner">Upcoming Reservations</h4>
+    <h4 class="upcoming-reservations-banner">Upcoming Reservations</h4>
     <section class="upcoming-reservations-container">
     </section>
     <h4 class="past-reservations-banner">Past Reservations</h4>
@@ -23,6 +23,16 @@
     <section class="total-amt-spent-container">
       <p class="total-amt-spent">Total Amount Spent:</p>
       <p class="amt-value">$Amount Here</p>
+    </section>
+  </section>
+  <section class="booking-reservation-view-section hidden" id="bookingReservationSection">
+    <h3 class="welcome-banner">Hello Human, please book a reservation</h3>
+    <h4 class="make-reservations-banner">Fill out reservation details here</h4>
+    <section class="form-details-container">
+     <!-- Need form details here -->
+    </section>
+    <h4 class="upcoming-reservations-banner">Upcoming Reservations</h4>
+    <section class="upcoming-reservations-container">
     </section>
   </section>
 </main>
