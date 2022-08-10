@@ -115,4 +115,15 @@ describe('Reservation', () => {
       costPerNight: 294.56
     })
   })
+
+  it('should return rooms by room type', function() {
+    expect(reservation.returnFilteredByRoomType('2022/02/05', 'single room')[0]).to.deep.equal({
+      number: 12,
+      roomType: 'single room',
+      bidet: false,
+      bedSize: 'twin',
+      numBeds: 2,
+      costPerNight: 172.09
+    })
+  })
 })

@@ -36,7 +36,22 @@
     <section>
     <section class="search-results-container">
       <div class="booking-result-box"></div>
-      <div class="booking-search-box"></div>
+      <div class="booking-search-box">
+        <form class="room-type-input" id="roomTypeInput">
+          <fieldset data-type="horizontal">
+          <legend>Please select your room type:</legend>
+            <input type="radio" id="singleRoom" name="roomType" value="single room" checked>
+            <label for="singleRoom">Single Room</label><br>
+            <input type="radio" id="juniorSuite" name="roomType" value="junior suite">
+            <label for="juniorSuite">Junior Suite</label><br>
+            <input type="radio" id="suite" name="roomType" value="suite">
+            <label for="suite">Suite</label><br>
+            <input type="radio" id="residentialSuite" name="roomType" value="residential suite">
+            <label for="residentialSuite">Residential Suite</label><br>
+            <button class="room-type-submit-button" id="roomTypeSubmitButton">Submit</button>
+          </fieldset>
+        </form>
+      </div>
     </section>
   <section>
 </main>

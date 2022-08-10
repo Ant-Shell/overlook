@@ -23,6 +23,9 @@ const homeViewSection = document.getElementById('homeSection');
 const bookingViewSection = document.getElementById('bookingReservationSection');
 const reservationsForm = document.getElementById('reservationForm');
 const selectDateButton = document.getElementById('selectDateButton');
+const roomTypeInput = document.getElementById('roomTypeInput');
+const roomTypeSubmitButton = document.getElementById('roomTypeSubmitButton');
+const radioButtons = document.querySelectorAll('input[name="roomType"]')
 
 // ###########  Global Variables  ###########
 let bookings;
@@ -55,6 +58,7 @@ function getPromiseData() {
 window.addEventListener('load', getPromiseData);
 bookRoomButton.addEventListener('click', bookingReservationView)
 selectDateButton.addEventListener('click', dateSelection)
+roomTypeSubmitButton.addEventListener('click', roomTypeSelection)
 
 // ###########  On-Load Functions  ###########
 function populatePastBookings() {
@@ -116,12 +120,40 @@ function createDateSelector() {
 
 function dateSelection() {
   resultMessage.innerText = ''
+  bookingResultBox.innerHTML = '';
   const customerDate = document.querySelector("form#reservationForm label input");
   const reformattedDate = customerDate.value.split("-").join("/");
   const filteredResults = reservation.returnFilteredByDate(reformattedDate);
   if (filteredResults.length === 0) {
     resultMessage.innerText = 'Sorry, there were no results. Please adjust your search.'
   } else {
+    filteredResults.forEach((result, index) => {
+      let div = document.createElement('div');
+      div.id = `filteredResult${[index + 1]}`;
+      div.className = 'filtered-booking-details'
+      div.innerHTML = `${result.number}, ${result.roomType}, ${result.bidet}, ${result.bedSize}, ${result.numBeds}, ${result.costPerNight}`
+      bookingResultBox.appendChild(div);
+    })
+  }
+}
+
+function roomTypeSelection(event) {
+  event.preventDefault();
+  resultMessage.innerText = ''
+  bookingResultBox.innerHTML = '';
+  const customerDate = document.querySelector("form#reservationForm label input");
+  const reformattedDate = customerDate.value.split("-").join("/");
+  let roomType;
+  let filteredResults;
+  radioButtons.forEach(button => {
+    if (button.checked) {
+      roomType = button.value;
+    }
+  })
+  filteredResults = reservation.returnFilteredByRoomType(reformattedDate, roomType);
+  if (filteredResults.length === 0) {
+    resultMessage.innerText = 'Sorry, there were no results. Please adjust your search.';
+    } else {
     filteredResults.forEach((result, index) => {
       let div = document.createElement('div');
       div.id = `filteredResult${[index + 1]}`;
