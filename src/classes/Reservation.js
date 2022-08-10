@@ -50,6 +50,12 @@ class Reservation {
     }, [])
     return availableRooms;
   }
+
+  returnFilteredByRoomType(date, roomtype) {
+    let availableRooms = this.returnFilteredByDate(date);
+    let filteredByRoomType = availableRooms.filter(room => room.roomType === roomtype)
+    return filteredByRoomType;
+  }
 }
 
 
