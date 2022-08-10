@@ -15,6 +15,7 @@ import './images/turing-logo.png'
 const upcomingReservationsContainer = document.querySelector('.upcoming-reservations-container');
 const upcomingReservationsContainer2 = document.querySelector('.upcoming-reservations-container2');
 const pastReservationsContainer = document.querySelector('.past-reservations-container');
+const bookingResultBox = document.querySelector('.booking-result-box')
 const amountValue = document.querySelector('.amt-value');
 const resultMessage = document.querySelector('.result-message')
 const bookRoomButton = document.getElementById('bookRoomButton');
@@ -134,11 +135,17 @@ function dateSelection() {
   resultMessage.innerText = ''
   const customerDate = document.querySelector("form#reservationForm label input");
   const reformattedDate = customerDate.value.split("-").join("/");
-  const dateSelected = reservation.returnFilteredByDate(reformattedDate);
-  if (dateSelected.length === 0) {
+  const filteredResults = reservation.returnFilteredByDate(reformattedDate);
+  if (filteredResults.length === 0) {
     resultMessage.innerText = 'Sorry, there were no results. Please adjust your search.'
   } else {
-    console.log("Hello")
+    filteredResults.forEach((result, index) => {
+      let div = document.createElement('div');
+      div.id = `filteredResult${[index + 1]}`;
+      div.className = 'filtered-booking-details'
+      div.innerHTML = `Booking ID: ${result.id}<br><br>Booking Date: ${result.date}</br></br>Room Number: ${result.roomNumber}`;
+      bookingResultBox.appendChild(div);
+    })
   }
 }
 
