@@ -16,6 +16,7 @@ const upcomingReservationsContainer = document.querySelector('.upcoming-reservat
 const upcomingReservationsContainer2 = document.querySelector('.upcoming-reservations-container2');
 const pastReservationsContainer = document.querySelector('.past-reservations-container');
 const amountValue = document.querySelector('.amt-value');
+const resultMessage = document.querySelector('.result-message')
 const bookRoomButton = document.getElementById('bookRoomButton');
 const homeViewSection = document.getElementById('homeSection');
 const bookingViewSection = document.getElementById('bookingReservationSection');
@@ -124,15 +125,21 @@ function createDateSelector() {
   let dateToday = new Date().toLocaleDateString('en-ZA')
   let minDate = dateToday.split("/").join("-");
   reservationsForm.innerHTML = 
-    `<label class="reservations-promt" id="reservationsPromt">Please select a date for your reservation:<br>
+    `<label class="reservations-promt" id="reservationsPromt">Please select a date for your reservation:
     <input type="date" name="reservation" value="${minDate}" min="${minDate}" class="customer-date" id="customerDate" required>
     </label>`;
 }
 
 function dateSelection() {
+  resultMessage.innerText = ''
   const customerDate = document.querySelector("form#reservationForm label input");
   const reformattedDate = customerDate.value.split("-").join("/");
-  console.log(reformattedDate)
+  const dateSelected = reservation.returnFilteredByDate(reformattedDate);
+  if (dateSelected.length === 0) {
+    resultMessage.innerText = 'Sorry, there were no results. Please adjust your search.'
+  } else {
+    console.log("Hello")
+  }
 }
 
 // ###########  View Functions  ###########
