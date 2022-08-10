@@ -19,7 +19,8 @@ const amountValue = document.querySelector('.amt-value');
 const bookRoomButton = document.getElementById('bookRoomButton');
 const homeViewSection = document.getElementById('homeSection');
 const bookingViewSection = document.getElementById('bookingReservationSection');
-const reservationsForm = document.getElementById('reservationForm')
+const reservationsForm = document.getElementById('reservationForm');
+const selectDateButton = document.getElementById('selectDateButton');
 
 // ###########  Global Variables  ###########
 let bookings;
@@ -51,6 +52,7 @@ function getPromiseData() {
 // ###########  Event Listeners  ###########
 window.addEventListener('load', getPromiseData);
 bookRoomButton.addEventListener('click', bookingReservationView)
+selectDateButton.addEventListener('click', dateSelection)
 
 // ###########  On-Load Functions  ###########
 function populatePastBookings() {
@@ -122,12 +124,16 @@ function createDateSelector() {
   let dateToday = new Date().toLocaleDateString('en-ZA')
   let minDate = dateToday.split("/").join("-");
   reservationsForm.innerHTML = 
-    `<label class="reservations-promt">Please select a date for your reservation:<br>
-    <input type="date" name="reservation" min="${minDate}" required>
+    `<label class="reservations-promt" id="reservationsPromt">Please select a date for your reservation:<br>
+    <input type="date" name="reservation" value="${minDate}" min="${minDate}" class="customer-date" id="customerDate" required>
     </label>`;
 }
 
-
+function dateSelection() {
+  const customerDate = document.querySelector("form#reservationForm label input");
+  const reformattedDate = customerDate.value.split("-").join("/");
+  console.log(reformattedDate)
+}
 
 // ###########  View Functions  ###########
 
