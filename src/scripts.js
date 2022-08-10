@@ -174,7 +174,7 @@ function postNewBooking(event) {
   let roomNum;
   bookingResults.childNodes.forEach(node =>  {
     if (target === node) {
-      roomNum = node.id;
+      roomNum = parseInt(node.id);
       fetch('http://localhost:3001/api/v1/bookings', {
         method: 'POST',
         headers: {'Content-type': 'application/json'},
@@ -188,6 +188,11 @@ function postNewBooking(event) {
             return response.json();
           }
         })
+        .then(booking => {
+          let newbooking = new Booking(booking.newBooking);
+          reservation.bookings.push(newbooking)
+          populateUpcomingBookings();
+        } )
         .catch(error => {
           resultMessage.innerText = error.message;
         })
