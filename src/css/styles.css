@@ -1,11 +1,7 @@
-* {
+/* * {
   outline: solid 1px red;
-}
+} */
 
-
-body {
-  /* background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%); */
-}
 
 header {
   display: flex;
@@ -71,7 +67,7 @@ footer {
 .form-details-container {
   text-align:center;
   width: 90vw;
-  height: 250px;
+  height: 90vh;
   padding: 10px;
   margin: 10px 0 0 0;
 }
@@ -99,21 +95,24 @@ footer {
 
 .search-results-container {
   display: flex;
+  flex-direction: column;
   align-content: center;
   width: 90vw;
-  height: 18vh;
-}
-
-.booking-search-box {
-  width: 30vw;
-  height: 18vh;
+  height: 85vh;
 }
 
 .booking-result-box {
   display: flex;
   justify-content: center;
-  width: 60vw;
-  height: 18vh;
+  flex-wrap: wrap;
+  width: 90vw;
+  height: 85vh;
+  overflow: auto;
+}
+
+.booking-search-box {
+  width: 90vw;
+  height: 15vh;
 }
 
 .total-amt-spent-container {
