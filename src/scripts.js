@@ -15,11 +15,14 @@ import './images/turing-logo.png'
 const upcomingReservationsContainer = document.querySelector('.upcoming-reservations-container');
 const upcomingReservationsContainer2 = document.querySelector('.upcoming-reservations-container2');
 const pastReservationsContainer = document.querySelector('.past-reservations-container');
+const bookingResultBox = document.querySelector('.booking-result-box')
 const amountValue = document.querySelector('.amt-value');
+const resultMessage = document.querySelector('.result-message')
 const bookRoomButton = document.getElementById('bookRoomButton');
 const homeViewSection = document.getElementById('homeSection');
 const bookingViewSection = document.getElementById('bookingReservationSection');
-const reservationsForm = document.getElementById('reservationForm')
+const reservationsForm = document.getElementById('reservationForm');
+const selectDateButton = document.getElementById('selectDateButton');
 
 // ###########  Global Variables  ###########
 let bookings;
@@ -51,6 +54,7 @@ function getPromiseData() {
 // ###########  Event Listeners  ###########
 window.addEventListener('load', getPromiseData);
 bookRoomButton.addEventListener('click', bookingReservationView)
+selectDateButton.addEventListener('click', dateSelection)
 
 // ###########  On-Load Functions  ###########
 function populatePastBookings() {
@@ -122,12 +126,28 @@ function createDateSelector() {
   let dateToday = new Date().toLocaleDateString('en-ZA')
   let minDate = dateToday.split("/").join("-");
   reservationsForm.innerHTML = 
-    `<label class="reservations-promt">Please select a date for your reservation:<br>
-    <input type="date" name="reservation" min="${minDate}" required>
+    `<label class="reservations-promt" id="reservationsPromt">Please select a date for your reservation:
+    <input type="date" name="reservation" value="${minDate}" min="${minDate}" class="customer-date" id="customerDate" required>
     </label>`;
 }
 
-
+function dateSelection() {
+  resultMessage.innerText = ''
+  const customerDate = document.querySelector("form#reservationForm label input");
+  const reformattedDate = customerDate.value.split("-").join("/");
+  const filteredResults = reservation.returnFilteredByDate(reformattedDate);
+  if (filteredResults.length === 0) {
+    resultMessage.innerText = 'Sorry, there were no results. Please adjust your search.'
+  } else {
+    filteredResults.forEach((result, index) => {
+      let div = document.createElement('div');
+      div.id = `filteredResult${[index + 1]}`;
+      div.className = 'filtered-booking-details'
+      div.innerHTML = `Booking ID: ${result.id}<br><br>Booking Date: ${result.date}</br></br>Room Number: ${result.roomNumber}`;
+      bookingResultBox.appendChild(div);
+    })
+  }
+}
 
 // ###########  View Functions  ###########
 

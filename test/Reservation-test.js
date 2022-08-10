@@ -104,4 +104,13 @@ describe('Reservation', () => {
   it('should be able to return the total amount spent on rooms', function() {
     expect(reservation.returnTotalCost()).to.equal('522.40')
   })
+
+  it('should return rooms only available on a certain date', function() {
+    expect(reservation.returnFilteredByDate("2022/02/05")[0]).to.deep.equal({
+      id: '5fwrgu4i7k55hl6t8',
+      userID: 1,
+      date: '2022/02/05',
+      roomNumber: 12
+    })
+  })
 })
