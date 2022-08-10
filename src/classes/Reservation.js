@@ -36,6 +36,13 @@ class Reservation {
     })
     return value.toFixed(2);
   }
+
+  returnFilteredByDate(date) {
+    let filteredByDate = this.bookings.filter(booking => {
+      return booking.date === date;
+    })
+    return filteredByDate;
+  }
 }
 
 
