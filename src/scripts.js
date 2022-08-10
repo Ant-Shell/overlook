@@ -99,26 +99,9 @@ function toggleView(section) {
   section.classList.toggle("hidden");
 }
 
-function populateUpcomingBookings2() {
-  let upcomingBookings = reservation.returnUpcomingBookings();
-  upcomingReservationsContainer2.innerHTML = '';
-  if (upcomingBookings.length === 0) {
-    upcomingReservationsContainer2.innerText = "No upcoming bookings at this time"
-  } else {
-    upcomingBookings.forEach((booking, index) => {
-      let div = document.createElement('div');
-      div.id = `upcomingReservation${[index + 1]}`;
-      div.className = 'upcoming-reservation-details'
-      div.innerHTML = `Booking ID: ${booking.id}<br><br>Booking Date: ${booking.date}</br></br>Room Number: ${booking.roomNumber}`;
-      upcomingReservationsContainer2.appendChild(div);
-    })
-  }
-}
-
 function bookingReservationView() {
   toggleView(homeViewSection);
   toggleView(bookingViewSection);
-  populateUpcomingBookings2();
   createDateSelector();
 }
 
@@ -143,7 +126,7 @@ function dateSelection() {
       let div = document.createElement('div');
       div.id = `filteredResult${[index + 1]}`;
       div.className = 'filtered-booking-details'
-      div.innerHTML = `Booking ID: ${result.id}<br><br>Booking Date: ${result.date}</br></br>Room Number: ${result.roomNumber}`;
+      div.innerHTML = `${result.number}, ${result.roomType}, ${result.bidet}, ${result.bedSize}, ${result.numBeds}, ${result.costPerNight}`
       bookingResultBox.appendChild(div);
     })
   }
