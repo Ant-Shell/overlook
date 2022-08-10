@@ -38,10 +38,19 @@ class Reservation {
   }
 
   returnFilteredByDate(date) {
-    let filteredByDate = this.bookings.filter(booking => {
-      return booking.date === date;
-    })
-    return filteredByDate;
+    // Need room details for only rooms that are 
+    // available on that date
+    let notBooked = this.bookings.filter(booking => booking.date !== date)
+
+    let availableRooms = notBooked.reduce((acc, available) => {
+      this.rooms.forEach(room => {
+        if (room.number === available.roomNumber && !acc.includes(room)) {
+          acc.push(room);
+        }
+      })
+      return acc
+    }, [])
+    return availableRooms;
   }
 }
 
