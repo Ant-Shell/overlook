@@ -88,6 +88,15 @@ footer {
   margin-right: 1vw;
 }
 
+.filtered-booking-details {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20vw;
+  height: 15vh;
+  border-radius: 20px;
+}
+
 .search-results-container {
   display: flex;
   align-content: center;
@@ -101,6 +110,8 @@ footer {
 }
 
 .booking-result-box {
+  display: flex;
+  justify-content: center;
   width: 60vw;
   height: 18vh;
 }
