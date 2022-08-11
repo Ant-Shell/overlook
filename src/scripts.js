@@ -1,5 +1,4 @@
 // ###########  Imports  ###########
-// An example of how you tell webpack to use a CSS (SCSS) file
 import './css/styles.css';
 import {fetchData} from './apiCalls';
 import Booking from './classes/Booking';
@@ -7,17 +6,12 @@ import Customer from './classes/Customer';
 import Reservation from './classes/Reservation';
 import Room from './classes/Room';
 
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
-import './images/turing-logo.png'
-
-
 // ###########  Query Selectors ###########
 const upcomingReservationsContainer = document.querySelector('.upcoming-reservations-container');
-// const upcomingReservationsContainer2 = document.querySelector('.upcoming-reservations-container2');
 const pastReservationsContainer = document.querySelector('.past-reservations-container');
-const bookingResultBox = document.querySelector('.booking-result-box')
+const bookingResultBox = document.querySelector('.booking-result-box');
 const amountValue = document.querySelector('.amt-value');
-const resultMessage = document.querySelector('.result-message')
+const resultMessage = document.querySelector('.result-message');
 const bookRoomButton = document.getElementById('bookRoomButton');
 const homeViewSection = document.getElementById('homeSection');
 const header = document.getElementById('header');
@@ -31,7 +25,7 @@ const bookingResults = document.getElementById('bookingResultBox');
 const usernameField = document.getElementById('username'); 
 const passwordField = document.getElementById('password');
 const loginSubmitButton = document.getElementById('loginSubmitButton');
-const notificationMessage = document.querySelector('.notification-message')
+const notificationMessage = document.querySelector('.notification-message');
 
 // ###########  Global Variables  ###########
 let bookings;
@@ -92,10 +86,6 @@ function loginSubmit(event) {
   }
 }
 
-// function logout(event) {
-
-// }
-
 // ###########  On-Load Functions  ###########
 function populatePastBookings() {
   let pastBookings = reservation.returnPastBookings();
@@ -135,10 +125,12 @@ function populateTotalCost() {
   amountValue.innerText = `$${cost}`;
 }
 
+// ###########  View Functions  ###########
 function toggleView(section) {
   section.classList.toggle("hidden");
 }
 
+// ###########  Show/Hide View Functions  ###########
 function bookingReservationView() {
   toggleView(homeViewSection);
   toggleView(bookingViewSection);
@@ -160,6 +152,7 @@ function createDateSelector() {
     </label>`;
 }
 
+// ###########  Search Functions  ###########
 function dateSelection() {
   resultMessage.innerText = ''
   bookingResultBox.innerHTML = '';
@@ -239,19 +232,6 @@ function postNewBooking(event) {
     }
   })
 }
-
-
-// ###########  View Functions  ###########
-
-
-
-
-// ###########  Show/Hide View Functions  ###########
-
-
-
-
-// ###########  Search Functions  ###########
 
 
 
