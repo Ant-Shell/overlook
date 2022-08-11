@@ -13,19 +13,25 @@ import './images/turing-logo.png'
 
 // ###########  Query Selectors ###########
 const upcomingReservationsContainer = document.querySelector('.upcoming-reservations-container');
-const upcomingReservationsContainer2 = document.querySelector('.upcoming-reservations-container2');
+// const upcomingReservationsContainer2 = document.querySelector('.upcoming-reservations-container2');
 const pastReservationsContainer = document.querySelector('.past-reservations-container');
 const bookingResultBox = document.querySelector('.booking-result-box')
 const amountValue = document.querySelector('.amt-value');
 const resultMessage = document.querySelector('.result-message')
 const bookRoomButton = document.getElementById('bookRoomButton');
 const homeViewSection = document.getElementById('homeSection');
+const header = document.getElementById('header');
+const loginView = document.getElementById('loginView');
 const bookingViewSection = document.getElementById('bookingReservationSection');
 const reservationsForm = document.getElementById('reservationForm');
 const selectDateButton = document.getElementById('selectDateButton');
 const roomTypeSubmitButton = document.getElementById('roomTypeSubmitButton');
-const radioButtons = document.querySelectorAll('input[name="roomType"]')
-const bookingResults = document.getElementById('bookingResultBox')
+const radioButtons = document.querySelectorAll('input[name="roomType"]');
+const bookingResults = document.getElementById('bookingResultBox');
+const usernameField = document.getElementById('username'); 
+const passwordField = document.getElementById('password');
+const loginSubmitButton = document.getElementById('loginSubmitButton');
+const notificationMessage = document.querySelector('.notification-message')
 
 // ###########  Global Variables  ###########
 let bookings;
@@ -36,6 +42,7 @@ let customerID;
 let reservation;
 let rooms;
 let roomData;
+let loginID;
 
 // ###########  Promises  ###########
 function getPromiseData() {
@@ -46,7 +53,7 @@ function getPromiseData() {
     bookings = bookingData.bookings.map(booking => new Booking(booking)); 
     customers = customerData.customers.map(customer => new Customer(customer));
     rooms = roomData.rooms.map(room => new Room(room));
-    customerID = customers[0].id;
+    customerID = loginID;
     reservation = new Reservation(customerID, rooms, bookings)
     populateUpcomingBookings();
     populatePastBookings();
@@ -55,11 +62,39 @@ function getPromiseData() {
 }
 
 // ###########  Event Listeners  ###########
+loginSubmitButton.addEventListener('click', loginSubmit)
 window.addEventListener('load', getPromiseData);
 bookRoomButton.addEventListener('click', bookingReservationView)
 selectDateButton.addEventListener('click', dateSelection)
 roomTypeSubmitButton.addEventListener('click', roomTypeSelection)
 bookingResults.addEventListener('click', postNewBooking)
+
+// ###########  Login Functions  ###########
+function loginSubmit(event) {
+  event.preventDefault()
+  notificationMessage.innerText = ''
+  if (!usernameField.value) {
+    notificationMessage.innerText = 'Please enter username';
+  } else if (!passwordField.value) {
+    notificationMessage.innerText = 'Please enter password';
+  } else if (passwordField.value !== 'overlook2021') {
+    notificationMessage.innerText = 'Please enter valid password';
+  } else {
+    loginID = usernameField.value.replace('customer', '')
+    fetch(`http://localhost:3001/api/v1/customers/${loginID}`)
+      .then(response => response.json())
+      .then(data => {
+        loginID = data.id
+      })
+      .catch(err => console.log(err))
+    getPromiseData()
+    dashboardView()
+  }
+}
+
+// function logout(event) {
+
+// }
 
 // ###########  On-Load Functions  ###########
 function populatePastBookings() {
@@ -108,6 +143,12 @@ function bookingReservationView() {
   toggleView(homeViewSection);
   toggleView(bookingViewSection);
   createDateSelector();
+}
+
+function dashboardView() {
+  toggleView(homeViewSection);
+  toggleView(header);
+  toggleView(loginView);
 }
 
 function createDateSelector() {
@@ -164,7 +205,6 @@ function roomTypeSelection(event) {
     })
   }
 }
-
 
 function postNewBooking(event) {
   let target = event.target;

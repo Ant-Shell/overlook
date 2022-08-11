@@ -38,6 +38,10 @@ footer {
   height: 7.5vh;
 }
 
+.login-view-section {
+  text-align: center;
+}
+
 .book-room-btn {
   margin-right: 80px;
 }

@@ -6,13 +6,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OverLook.com</title>
 </head>
-<header>
+<header class="header hidden" id="header">
   <h1>OverLook.com</h1>
-  <h2 class="affirmation-message">Random Affirmation Message Here</h2>
+  <h2 class="affirmation-message"></h2>
   <button type="button" class="book-room-btn" id="bookRoomButton">Book a Room</button>
 </header>
 <main>
-  <section class="home-view-section" id="homeSection">
+  <section class="login-view-section" id="loginView">
+    <section class="login-banner-container">
+      <h2 class="login-banner">OverLook.com</h2>
+      <h2 class="branding-message-banner">Your Hotel Location Station</h2>
+    </section>
+    <section class="login-message-container">
+      <h2 class="welcome">Welcome!</h2>
+      <h2 class="login-message">Please log in to find your perfect stay.</h2>
+    </section>
+    <section class="login-section">
+      <form>
+        <fieldset>
+          <p class="notification-message"></p>
+          <label for="username">Enter username:</label><br>
+          <input type="text" id="username" name="username"><br>
+          <label for="password">Enter password:</label><br>
+          <input type="text" id="password" name="password"><br>
+          <input type="submit" value="Submit" id="loginSubmitButton">
+        </fieldset>
+      </form>
+    </section>
+  </section>
+  <section class="home-view-section hidden" id="homeSection">
     <h3 class="welcome-banner">Welcome Human, here are your account details</h3>
     <h4 class="upcoming-reservations-banner">Upcoming Reservations</h4>
     <section class="upcoming-reservations-container">
