@@ -23,9 +23,9 @@ const homeViewSection = document.getElementById('homeSection');
 const bookingViewSection = document.getElementById('bookingReservationSection');
 const reservationsForm = document.getElementById('reservationForm');
 const selectDateButton = document.getElementById('selectDateButton');
-const roomTypeInput = document.getElementById('roomTypeInput');
 const roomTypeSubmitButton = document.getElementById('roomTypeSubmitButton');
 const radioButtons = document.querySelectorAll('input[name="roomType"]')
+const bookingResults = document.getElementById('bookingResultBox')
 
 // ###########  Global Variables  ###########
 let bookings;
@@ -59,6 +59,7 @@ window.addEventListener('load', getPromiseData);
 bookRoomButton.addEventListener('click', bookingReservationView)
 selectDateButton.addEventListener('click', dateSelection)
 roomTypeSubmitButton.addEventListener('click', roomTypeSelection)
+bookingResults.addEventListener('click', postNewBooking)
 
 // ###########  On-Load Functions  ###########
 function populatePastBookings() {
@@ -127,9 +128,9 @@ function dateSelection() {
   if (filteredResults.length === 0) {
     resultMessage.innerText = 'Sorry, there were no results. Please adjust your search.'
   } else {
-    filteredResults.forEach((result, index) => {
+    filteredResults.forEach(result => {
       let div = document.createElement('div');
-      div.id = `filteredResult${[index + 1]}`;
+      div.id = result.number;
       div.className = 'filtered-booking-details'
       div.innerHTML = `${result.number}, ${result.roomType}, ${result.bidet}, ${result.bedSize}, ${result.numBeds}, ${result.costPerNight}`
       bookingResultBox.appendChild(div);
@@ -154,15 +155,51 @@ function roomTypeSelection(event) {
   if (filteredResults.length === 0) {
     resultMessage.innerText = 'Sorry, there were no results. Please adjust your search.';
     } else {
-    filteredResults.forEach((result, index) => {
+    filteredResults.forEach(result => {
       let div = document.createElement('div');
-      div.id = `filteredResult${[index + 1]}`;
+      div.id = result.number;
       div.className = 'filtered-booking-details'
       div.innerHTML = `${result.number}, ${result.roomType}, ${result.bidet}, ${result.bedSize}, ${result.numBeds}, ${result.costPerNight}`
       bookingResultBox.appendChild(div);
     })
   }
 }
+
+
+function postNewBooking(event) {
+  let target = event.target;
+  const customerDate = document.querySelector("form#reservationForm label input");
+  const reformattedDate = customerDate.value.split("-").join("/");
+  let customerID = reservation.customerID;
+  let roomNum;
+  bookingResults.childNodes.forEach(node =>  {
+    if (target === node) {
+      roomNum = parseInt(node.id);
+      fetch('http://localhost:3001/api/v1/bookings', {
+        method: 'POST',
+        headers: {'Content-type': 'application/json'},
+        body: JSON.stringify({ userID: customerID, date: reformattedDate, roomNumber: roomNum})
+      })
+        .then(response =>{
+          if (!response.ok) {
+          throw new Error ('Sorry, unable to book room at this time. Please try selecting another.')
+          } else {
+            resultMessage.innerText = `Room ${roomNum} booked successfully!`
+            return response.json();
+          }
+        })
+        .then(booking => {
+          let newbooking = new Booking(booking.newBooking);
+          reservation.bookings.push(newbooking)
+          populateUpcomingBookings();
+        } )
+        .catch(error => {
+          resultMessage.innerText = error.message;
+        })
+    }
+  })
+}
+
 
 // ###########  View Functions  ###########
 

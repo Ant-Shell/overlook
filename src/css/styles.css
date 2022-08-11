@@ -93,6 +93,11 @@ footer {
   border-radius: 20px;
 }
 
+.filtered-booking-details:hover {
+  cursor: pointer;
+  background-color: darkgrey;
+}
+
 .search-results-container {
   display: flex;
   flex-direction: column;
