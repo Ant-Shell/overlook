@@ -37,8 +37,17 @@ footer {
   text-align: center;
 }
 
-.book-room-btn {
+.log-out-btn {
   margin-right: 80px;
+}
+
+.book-room-btn {
+  margin-right: 50px;
+}
+
+.book-room-button-container {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .home-view-section,
