@@ -48,7 +48,7 @@ function getPromiseData() {
     customers = customerData.customers.map(customer => new Customer(customer));
     rooms = roomData.rooms.map(room => new Room(room));
     customerID = loginID;
-    reservation = new Reservation(customerID, rooms, bookings)
+    reservation = new Reservation(customerID, rooms, bookings);
     populateUpcomingBookings();
     populatePastBookings();
     populateTotalCost();
@@ -56,16 +56,16 @@ function getPromiseData() {
 }
 
 // ###########  Event Listeners  ###########
-loginSubmitButton.addEventListener('click', loginSubmit)
+loginSubmitButton.addEventListener('click', loginSubmit);
 window.addEventListener('load', getPromiseData);
-bookRoomButton.addEventListener('click', bookingReservationView)
-selectDateButton.addEventListener('click', dateSelection)
-roomTypeSubmitButton.addEventListener('click', roomTypeSelection)
-bookingResults.addEventListener('click', postNewBooking)
+bookRoomButton.addEventListener('click', bookingReservationView);
+selectDateButton.addEventListener('click', dateSelection);
+roomTypeSubmitButton.addEventListener('click', roomTypeSelection);
+bookingResults.addEventListener('click', postNewBooking);
 
 // ###########  Login Functions  ###########
 function loginSubmit(event) {
-  event.preventDefault()
+  event.preventDefault();
   notificationMessage.innerText = ''
   if (!usernameField.value) {
     notificationMessage.innerText = 'Please enter username';
@@ -74,15 +74,23 @@ function loginSubmit(event) {
   } else if (passwordField.value !== 'overlook2021') {
     notificationMessage.innerText = 'Please enter valid password';
   } else {
-    loginID = usernameField.value.replace('customer', '')
+    loginID = usernameField.value.replace('customer', '');
     fetch(`http://localhost:3001/api/v1/customers/${loginID}`)
-      .then(response => response.json())
-      .then(data => {
-        loginID = data.id
+      .then(response => {
+        if (!response.ok) {
+          throw new Error (`Sorry, no customer by id ${loginID}. Please try again.`);
+        } else {
+          return response.json();
+        }
       })
-      .catch(err => console.log(err))
-    getPromiseData()
-    dashboardView()
+      .then(data => {
+        loginID = data.id;
+        getPromiseData();
+        dashboardView();
+      })
+      .catch(error => {
+        notificationMessage.innerText = error.message;
+      })
   }
 }
 
@@ -91,7 +99,7 @@ function populatePastBookings() {
   let pastBookings = reservation.returnPastBookings();
   pastReservationsContainer.innerHTML = '';
   if (pastBookings.length === 0) {
-    pastReservationsContainer.innerText = "No previous bookings at this time"
+    pastReservationsContainer.innerText = "No previous bookings at this time";
   } else {
     pastBookings.forEach((booking, index) => {
       let div = document.createElement('div');
@@ -154,19 +162,19 @@ function createDateSelector() {
 
 // ###########  Search Functions  ###########
 function dateSelection() {
-  resultMessage.innerText = ''
+  resultMessage.innerText = '';
   bookingResultBox.innerHTML = '';
   const customerDate = document.querySelector("form#reservationForm label input");
   const reformattedDate = customerDate.value.split("-").join("/");
   const filteredResults = reservation.returnFilteredByDate(reformattedDate);
   if (filteredResults.length === 0) {
-    resultMessage.innerText = 'Sorry, there were no results. Please adjust your search.'
+    resultMessage.innerText = 'Sorry, there were no results. Please adjust your search.';
   } else {
     filteredResults.forEach(result => {
       let div = document.createElement('div');
       div.id = result.number;
-      div.className = 'filtered-booking-details'
-      div.innerHTML = `${result.number}, ${result.roomType}, ${result.bidet}, ${result.bedSize}, ${result.numBeds}, ${result.costPerNight}`
+      div.className = 'filtered-booking-details';
+      div.innerHTML = `${result.number}, ${result.roomType}, ${result.bidet}, ${result.bedSize}, ${result.numBeds}, ${result.costPerNight}`;
       bookingResultBox.appendChild(div);
     })
   }
@@ -174,7 +182,7 @@ function dateSelection() {
 
 function roomTypeSelection(event) {
   event.preventDefault();
-  resultMessage.innerText = ''
+  resultMessage.innerText = '';
   bookingResultBox.innerHTML = '';
   const customerDate = document.querySelector("form#reservationForm label input");
   const reformattedDate = customerDate.value.split("-").join("/");
@@ -192,8 +200,8 @@ function roomTypeSelection(event) {
     filteredResults.forEach(result => {
       let div = document.createElement('div');
       div.id = result.number;
-      div.className = 'filtered-booking-details'
-      div.innerHTML = `${result.number}, ${result.roomType}, ${result.bidet}, ${result.bedSize}, ${result.numBeds}, ${result.costPerNight}`
+      div.className = 'filtered-booking-details';
+      div.innerHTML = `${result.number}, ${result.roomType}, ${result.bidet}, ${result.bedSize}, ${result.numBeds}, ${result.costPerNight}`;
       bookingResultBox.appendChild(div);
     })
   }
@@ -217,13 +225,13 @@ function postNewBooking(event) {
           if (!response.ok) {
           throw new Error ('Sorry, unable to book room at this time. Please try selecting another.')
           } else {
-            resultMessage.innerText = `Room ${roomNum} booked successfully!`
+            resultMessage.innerText = `Room ${roomNum} booked successfully!`;
             return response.json();
           }
         })
         .then(booking => {
           let newbooking = new Booking(booking.newBooking);
-          reservation.bookings.push(newbooking)
+          reservation.bookings.push(newbooking);
           populateUpcomingBookings();
         } )
         .catch(error => {
