@@ -13,6 +13,7 @@ const bookingResultBox = document.querySelector('.booking-result-box');
 const amountValue = document.querySelector('.amt-value');
 const resultMessage = document.querySelector('.result-message');
 const bookRoomButton = document.getElementById('bookRoomButton');
+const logOutButton = document.getElementById('logOutButton')
 const homeViewSection = document.getElementById('homeSection');
 const header = document.getElementById('header');
 const loginView = document.getElementById('loginView');
@@ -62,6 +63,7 @@ bookRoomButton.addEventListener('click', bookingReservationView);
 selectDateButton.addEventListener('click', dateSelection);
 roomTypeSubmitButton.addEventListener('click', roomTypeSelection);
 bookingResults.addEventListener('click', postNewBooking);
+logOutButton.addEventListener('click', logOut)
 
 // ###########  Login Functions  ###########
 function loginSubmit(event) {
@@ -146,9 +148,19 @@ function bookingReservationView() {
 }
 
 function dashboardView() {
-  toggleView(homeViewSection);
   toggleView(header);
+  toggleView(homeViewSection);
   toggleView(loginView);
+  toggleView(bookRoomButton);
+}
+
+function logOut() {
+  toggleView(loginView);
+  toggleView(header);
+  toggleView(homeViewSection);
+  toggleView(bookRoomButton);
+  usernameField.value = '';
+  passwordField.value = '';
 }
 
 function createDateSelector() {
