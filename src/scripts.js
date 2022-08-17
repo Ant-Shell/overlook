@@ -155,12 +155,21 @@ function dashboardView() {
 }
 
 function logOut() {
-  toggleView(loginView);
-  toggleView(header);
-  toggleView(homeViewSection);
-  toggleView(bookRoomButton);
-  usernameField.value = '';
-  passwordField.value = '';
+  if (!bookingViewSection.classList.contains("hidden")) {
+    bookingViewSection.classList.add("hidden");
+    toggleView(loginView);
+    toggleView(header);
+    toggleView(bookRoomButton);
+    usernameField.value = '';
+    passwordField.value = '';
+  } else {
+    toggleView(loginView);
+    toggleView(header);
+    toggleView(homeViewSection);
+    toggleView(bookRoomButton);
+    usernameField.value = '';
+    passwordField.value = '';
+  }
 }
 
 function createDateSelector() {
